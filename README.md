@@ -41,7 +41,7 @@ Xem chi tiết tại: [Setup.md](https://www.notion.so/hwuxfuoc/Setup.md)
 | Nội dung | Link |
 | --- | --- |
 | **Database ER Diagram** | [Eraser.io Workspace](https://app.eraser.io/workspace/MibBxluYc33hORCIUomJ?origin=share) |
-| **MongoDB Atlas** | [Mongo](mongodb+srv://hwuxfuoc19it_db_user:e76NQ2jZaEZEzvXN@clusterurbantech.97zwxie.mongodb.net?retryWrites=true&w=majority) |
+| **MongoDB Atlas** | [Mongo](https://www.notion.so/Readme-2e246aa7781c804a96c9e28bc1a80616?pvs=21) |
 | **Frontend (Local)** | [http://localhost:3000](http://localhost:3000/) |
 | **Backend API (Local)** | [http://localhost:5000](http://localhost:5000/) |
 | **Deploy Live** | (Sắp cập nhật khi deploy lên Render) |
