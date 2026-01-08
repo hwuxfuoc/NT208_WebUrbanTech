@@ -7,9 +7,7 @@ WebFrontend: [Web](http://localhost:3000)
 
 # NT208_WebUrbanTech
 
-**WebUrbanTech** — Một nền tảng bất động sản hiện đại, lấy cảm hứng từ các trang như [batdongsan.com.vn](http://batdongsan.com.vn/). Dự án này cho phép người dùng đăng ký/đăng nhập, đăng tin bán/thuê nhà đất với hình ảnh chi tiết, thông tin giá cả, vị trí; xem và tìm kiếm các tin đăng khác; kết bạn, chat trực tiếp với người bán; và tích hợp tư vấn bất động sản bằng AI trong tương lai.
-
-Đây là dự án học tập và thực hành fullstack web development, được xây dựng từ con số 0 với mục tiêu áp dụng các công nghệ hiện đại trong thực tế.
+**WebUrbanTech** — Một nền tảng bất động sản hiện đại, lấy cảm hứng từ các trang như [batdongsan.com.vn](http://batdongsan.com.vn/). Dự án này cho phép người dùng đăng ký/đăng nhập, đăng tin bán/thuê nhà đất với hình ảnh chi tiết, thông tin giá cả, vị trí, số lượng phòng; xem và tìm kiếm các tin đăng khác; kết bạn, chat trực tiếp với người bán; và tích hợp tư vấn bất động sản bằng AI.
 
 ### Tech Stack & Kiến Trúc Dự Án
 
