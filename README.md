@@ -4,9 +4,9 @@
 
 ### Tech Stack & Kiến Trúc Dự Án
 
-Dự án sử dụng **MERN Stack** (MongoDB - Express - React - Node.js) — toàn bộ bằng JavaScript để dễ quản lý và học tập.
+Dự án sử dụng **MERN Stack** (MongoDB - Express - React - Node.js) — toàn bộ bằng JavaScript.
 
-| Phần | Công nghệ chính | Mô tả ngắn gọn |
+| Phần | Công nghệ chính | Mô tả |
 | --- | --- | --- |
 | **Frontend** | React (với Create React App), JSX, Axios, React Router DOM, Material UI (MUI) | Giao diện người dùng: trang chủ, đăng tin, xem listing, profile, chat, đăng ký/đăng nhập. Chạy local trên port 3000. |
 | **Backend** | Node.js, Express.js, Mongoose, JWT (auth), bcryptjs (hash password), cors, dotenv | Xử lý API (CRUD bất động sản, user, chat), authentication, kết nối database. Chạy local trên port 5000. |
