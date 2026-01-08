@@ -34,7 +34,7 @@ batdongsan-app/
 
 ### Hướng Dẫn Cài Đặt & Chạy Local
 
-Xem chi tiết tại: [Setup.md](Setup.md)
+Xem chi tiết tại: [Setup](Setup.md)
 
 ### Các Liên Kết Quan Trọng
 
