@@ -13,11 +13,11 @@
 - **Bước 3: Cài VS Code**
     - Truy cập: [https://code.visualstudio.com](https://code.visualstudio.com/)
     - Tải và cài.
-    - Mở VS Code, cài extension: "ESLint", "Prettier", "MongoDB for VS Code" (để connect DB sau).
+    - Mở VS Code, cài extension: "ESLint", "Prettier", "MongoDB for VS Code".
 
 ### 2. Chuẩn Bị MongoDB (Database)
 
-- Dùng **MongoDB Atlas** (cloud miễn phí)
+- Dùng **MongoDB Atlas** 
 - **Bước 1: Đăng ký tài khoản MongoDB Atlas**
     - Truy cập: https://www.mongodb.com/atlas/database
     - Click "Sign Up" → Đăng ký bằng email hoặc Google account (miễn phí).
@@ -46,10 +46,7 @@
     - **Connection String**: `mongodb+srv://hwuxfuoc19it_db_user:e76NQ2jZaEZEzvXN@clusterurbantech.97zwxie.mongodb.net?retryWrites=true&w=majority`
 - **Bước 6: Test kết nối (tùy chọn, dùng VS Code hoặc Compass)**
     - Cài MongoDB Compass (từ https://www.mongodb.com/products/tools/compass).
-    - Paste connection string vào Compass → Connect → Nếu thấy database "admin" là OK.
-    - Tạo database mới: Trong Compass, click "Create Database" → Tên: `batdongsan` (sẽ dùng cho app).
-
-→ Xong phần DB! Bây giờ DB của bạn đã sẵn sàng trên cloud.
+    - Paste connection string vào Compass → Connect → Nếu thấy database là OK.
 
 ### 3. Chuẩn Bị Backend (Node.js + Express)
 
