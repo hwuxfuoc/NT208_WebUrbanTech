@@ -1,11 +1,4 @@
 # NT208_WebUrbanTech
-Description:...
-Install: [Setup](Setup.md)
-Database Graph: [Eraser](https://app.eraser.io/workspace/MibBxluYc33hORCIUomJ?origin=share)
-MongoDB: [Mongo](mongodb+srv://hwuxfuoc19it_db_user:e76NQ2jZaEZEzvXN@clusterurbantech.97zwxie.mongodb.net?retryWrites=true&w=majority)
-WebFrontend: [Web](http://localhost:3000)
-
-# NT208_WebUrbanTech
 
 **WebUrbanTech** — Một nền tảng bất động sản hiện đại, lấy cảm hứng từ các trang như [batdongsan.com.vn](http://batdongsan.com.vn/). Dự án này cho phép người dùng đăng ký/đăng nhập, đăng tin bán/thuê nhà đất với hình ảnh chi tiết, thông tin giá cả, vị trí, số lượng phòng; xem và tìm kiếm các tin đăng khác; kết bạn, chat trực tiếp với người bán; và tích hợp tư vấn bất động sản bằng AI.
 
