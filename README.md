@@ -19,14 +19,14 @@ Dự án sử dụng **MERN Stack** (MongoDB - Express - React - Node.js) — to
 | **Backend** | Node.js, Express.js, Mongoose, JWT (auth), bcryptjs (hash password), cors, dotenv | Xử lý API (CRUD bất động sản, user, chat), authentication, kết nối database. Chạy local trên port 5000. |
 | **Database** | MongoDB (MongoDB Atlas - free tier M0) | Lưu trữ dữ liệu user, property, message, conversation, favorite, v.v. theo schema đã thiết kế (ERD). |
 | **Upload ảnh** | Cloudinary (free tier) hoặc tương tự (sẽ tích hợp sau) | Quản lý hình ảnh bất động sản. |
-| **Deploy** | [Render.com](http://render.com/) (full app hoặc backend), Vercel/Netlify (frontend static) | Dự kiến deploy miễn phí khi hoàn thiện. |
+| **Deploy** | [Render.com](http://render.com/), Vercel/Netlify (frontend static) | Dự kiến deploy miễn phí. |
 
 Cấu trúc thư mục chính:
 
 ```
 batdongsan-app/
-├── backend/       # Server Node/Express + models/routes
-├── frontend/      # React app
+├── backend/      
+├── frontend/     
 └── README.md
 ```
 
@@ -42,4 +42,4 @@ Xem chi tiết tại: [Setup](Setup.md)
 | **MongoDB Atlas** | mongodb+srv://hwuxfuoc19it_db_user:e76NQ2jZaEZEzvXN@clusterurbantech.97zwxie.mongodb.net?retryWrites=true&w=majority |
 | **Frontend (Local)** | [http://localhost:3000](http://localhost:3000/) |
 | **Backend API (Local)** | [http://localhost:5000](http://localhost:5000/) |
-| **Deploy Live** | (Sắp cập nhật khi deploy lên Render) |
+| **Deploy Live** | (Render) |
