@@ -41,7 +41,7 @@ Xem chi tiết tại: [Setup](Setup.md)
 | Nội dung | Link |
 | --- | --- |
 | **Database ER Diagram** | [Eraser.io Workspace](https://app.eraser.io/workspace/MibBxluYc33hORCIUomJ?origin=share) |
-| **MongoDB Atlas** | [Mongo](mongodb+srv://hwuxfuoc19it_db_user:e76NQ2jZaEZEzvXN@clusterurbantech.97zwxie.mongodb.net?retryWrites=true&w=majority) |
+| **MongoDB Atlas** | mongodb+srv://hwuxfuoc19it_db_user:e76NQ2jZaEZEzvXN@clusterurbantech.97zwxie.mongodb.net?retryWrites=true&w=majority |
 | **Frontend (Local)** | [http://localhost:3000](http://localhost:3000/) |
 | **Backend API (Local)** | [http://localhost:5000](http://localhost:5000/) |
 | **Deploy Live** | (Sắp cập nhật khi deploy lên Render) |
