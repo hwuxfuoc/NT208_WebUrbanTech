@@ -76,7 +76,7 @@
     - Tạo file `.env` (lưu secret):
         
         ```
-        MONGO_URI=mongodb+srv://hwuxfuoc19it_db_user:e76NQ2jZaEZEzvXN@clusterurbantech.97zwxie.mongodb.net?retryWrites=true&w=majority  
+        MONGOOSE_DB_URL=mongodb+srv://hwuxfuoc19it_db_user:e76NQ2jZaEZEzvXN@clusterurbantech.97zwxie.mongodb.net?retryWrites=true&w=majority  
         PORT=5000
         JWT_SECRET=mysecretkey 
         ```
