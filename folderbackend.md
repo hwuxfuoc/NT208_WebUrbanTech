@@ -1,3 +1,126 @@
+## Cấu trúc hiện tại của backend
+### Cấu trúc thư mục API
+
+```
+backend/
+├── config/
+│   ├── db.js
+│   ├── cloudinary.js
+│   ├── firebase.js
+│   ├── passport_fb.js
+│   └── passport_gg.js
+├── logging/
+│   └── eventLogger.js
+├── middleware/
+│   └── auth.js          # JWT verify chung
+├── models/
+│   ├── user.js
+│   ├── property.js
+│   ├── propertyImage.js
+│   ├── friend.js
+│   ├── friendRequest.js
+│   ├── conversation.js
+│   ├── message.js
+│   ├── favorite.js
+│   └── aiConsultation.js
+├── api/                 
+│   ├── auth/
+│   │   ├── auth.js           
+│   │   └── authController.js 
+│   ├── user/
+│   │   ├── user.js
+│   │   └── userController.js
+│   ├── property/
+│   │   ├── property.js
+│   │   ├── propertyImage.js
+│   │   ├── propertyController.js
+│   │   └── propertyImageController.js
+│   ├── favorite/
+│   │   ├── favorite.js
+│   │   └── favoriteController.js
+│   ├── friend/
+│   │   ├── friend.js
+│   │   └── friendController.js
+│   ├── friendResquest/
+│   │   ├── friendRequest.js
+│   │   └── friendRequestController.js
+│   ├── conversation/
+│   │   ├── conversation.js
+│   │   └── conversationController.js
+│   ├── message/
+│   │   ├── message.js
+│   │   └── messageController.js
+│   └── aiConsultation/
+│       ├── aiConsultation.js
+│       └── aiConsultationController.js
+├── utils/               
+├── server.js
+├── .env
+└── package.json
+```
+
+### API & Routes
+
+| Nhóm API | Route | Method | Protected? | Mô tả chính |
+| --- | --- | --- | --- | --- |
+| **1. Auth (Đăng ký / Đăng nhập)** |  |  |  |  |
+|  | `/api/auth/register` | POST | No | Đăng ký user mới (hash password bằng bcrypt) |
+|  | `/api/auth/login` | POST | No | Đăng nhập → trả về JWT token |
+|  | `/api/auth/me` | GET | Yes | Lấy thông tin user hiện tại (dùng token) |
+|  | `/api/auth/logout` | POST | Yes | (Optional) Xóa token nếu dùng blacklist |
+| **2. User (Quản lý profile)** |  |  |  |  |
+|  | `/api/users/:id` | GET | No | Xem profile public của user khác |
+|  | `/api/users/me` | GET | Yes | Xem profile cá nhân |
+|  | `/api/users/me` | PUT | Yes | Cập nhật profile (avatar, bio, phone...) |
+|  | `/api/users/me/password` | PUT | Yes | Đổi mật khẩu |
+|  | `/api/users/search` | GET | No | Tìm kiếm user để kết bạn (query ?q=keyword). |
+| **3. Property (Bất động sản - Core)** |  |  |  |  |
+|  | `/api/properties` | GET | No | Lấy danh sách (có filter: city, price, type, status, search...) |
+|  | `/api/properties` | POST | Yes | Đăng tin mới (chỉ owner) |
+|  | `/api/properties/:id` | GET | No | Xem chi tiết 1 bất động sản + ảnh + owner info |
+|  | `/api/properties/:id` | PUT | Yes (owner) | Sửa tin (chỉ owner) |
+|  | `/api/properties/:id` | DELETE | Yes (owner) | Xóa tin (chỉ owner) |
+|  | `/api/properties/:id/views` | POST | No | Tăng lượt xem (increment views) |
+|  | `/api/properties/my` | GET | No | Lấy danh sách tin đăng của chính mình (dễ quản lý profile) |
+| **4. Property Image** |  |  |  |  |
+|  | `/api/properties/:id/images` | POST | Yes (owner) | Upload ảnh mới cho property (Cloudinary) |
+|  | `/api/properties/:id/images/:imageId` | DELETE | Yes (owner) | Xóa ảnh |
+| **5. Favorite (Yêu thích)** |  |  |  |  |
+|  | `/api/favorites` | GET | Yes | Lấy danh sách property yêu thích của user |
+|  | `/api/favorites` | POST | Yes | Thêm property vào yêu thích (body: { propertyId }) |
+|  | `/api/favorites/:propertyId` | DELETE | Yes | Xóa khỏi yêu thích |
+|  | `/api/properties/:id/favorite` | GET | Yes | Check property này có đang favorite không |
+| **6. Friend & Friend Request** |  |  |  |  |
+|  | `/api/friends/requests` | GET | Yes | Lấy danh sách lời mời kết bạn đang pending |
+|  | `/api/friends/requests` | POST | Yes | Gửi lời mời kết bạn (to: userId) |
+|  | `/api/friends/requests/:id/accept` | POST | Yes | Chấp nhận lời mời |
+|  | `/api/friends/requests/:id/reject` | POST | Yes | Từ chối lời mời |
+|  | `/api/friends` | GET | Yes | Lấy danh sách bạn bè |
+|  | `/api/friends/:id` | DELETE | Yes | Xóa bạn |
+| **7. Conversation & Chat** |  |  |  |  |
+|  | `/api/conversations` | GET | Yes | Lấy danh sách cuộc trò chuyện của user |
+|  | `/api/conversations` | POST | Yes | Tạo conversation mới (direct với user khác) |
+|  | `/api/conversations/:id` | GET | Yes | Lấy chi tiết conversation + messages |
+|  | `/api/conversations/:id/messages` | GET | Yes | Lấy tin nhắn (pagination) |
+|  | `/api/conversations/:id/messages` | POST | Yes | Gửi tin nhắn mới (content hoặc imgUrl) |
+|  | `/api/conversations/:id/read` | POST | Yes | Đánh dấu đã đọc (update seenBy, unreadCounts) |
+|  | `/api/conversations/direct/:userId` | POST | No | Tạo conversation trực tiếp với user khác (rất tiện cho "Chat ngay" trên tin đăng). |
+| **8. AI Consultation (Tư vấn AI)** |  |  |  |  |
+|  | `/api/ai/consult` | POST | Yes | Gửi query về property → gọi AI (Grok/GPT) → lưu response |
+|  | `/api/ai/history` | GET | Yes | Lấy lịch sử tư vấn của user |
+|  | `/api/ai/:id/rate` | POST | Yes | Đánh giá phản hồi AI (1-5 sao) |
+
+### Thứ tự ưu tiên triển khai
+
+1. **Auth** (register / login / me) → Cơ bản nhất, cần để bảo vệ các route sau
+2. **Property CRUD + Images** → Core của web bất động sản
+3. **Favorite** → Tăng tương tác người dùng
+4. **User profile** → Hoàn thiện phần cá nhân
+5. **Friend + FriendRequest** → Kết nối người dùng
+6. **Conversation + Message** → Chat realtime (có thể dùng [Socket.io](http://socket.io/) sau)
+7. **AI Consultation** → Feature nâng cao cuối cùng
+
+## Giải thích 4 folder chính trong backend
 ### 1. models/ – "Bộ xương" của dữ liệu (BẮT BUỘC trong hầu hết dự án MongoDB)
 
 **models/** là nơi định nghĩa **cấu trúc dữ liệu** (schema) và **mô hình** (model) mà bạn sẽ làm việc với MongoDB thông qua Mongoose (hoặc driver khác).
