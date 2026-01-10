@@ -1,4 +1,4 @@
-## Cấu trúc hiện tại của backend
+# Cấu trúc hiện tại của backend
 ### Cấu trúc thư mục API
 
 ```
@@ -120,7 +120,8 @@ backend/
 6. **Conversation + Message** → Chat realtime (có thể dùng [Socket.io](http://socket.io/) sau)
 7. **AI Consultation** → Feature nâng cao cuối cùng
 
-## Giải thích 4 folder chính trong backend
+---
+# Giải thích 4 folder chính trong backend
 ### 1. models/ – "Bộ xương" của dữ liệu (BẮT BUỘC trong hầu hết dự án MongoDB)
 
 **models/** là nơi định nghĩa **cấu trúc dữ liệu** (schema) và **mô hình** (model) mà bạn sẽ làm việc với MongoDB thông qua Mongoose (hoặc driver khác).
