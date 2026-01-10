@@ -27,7 +27,7 @@ batdongsan-app/
 
 Xem chi tiết tại: [Setup](Setup.md)
 
-### Các Liên Kết Quan Trọng
+### Các Liên Kết
 
 | Nội dung | Link |
 | --- | --- |
