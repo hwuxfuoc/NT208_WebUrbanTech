@@ -27,7 +27,8 @@ batdongsan-app/
 
 Xem chi tiết tại: [Setup](Setup.md)
 
-### Chi tiết về cấu trúc thư mục Backend, các API và giải thích xem [tại đây](Folder_Backend.md)
+### Chi tiết về cấu trúc thư mục Backend, các API và giải thích 
+Xem chi tiết [tại đây](Folder_Backend.md)
 
 ### Các Liên Kết
 
