@@ -2,7 +2,7 @@
 
 - **Bước 1: Cài Node.js**
     - Truy cập trang chính thức: [https://nodejs.org](https://nodejs.org/)
-    - Tải phiên bản LTS (Long Term Support, ổn định nhất, hiện tại là 20.x hoặc mới hơn vào 2026).
+    - Tải phiên bản LTS.
     - Cài đặt như phần mềm bình thường (next next finish).
     - Kiểm tra cài thành công: Mở terminal, chạy lệnh `node -v` và `npm -v`. Nếu thấy version (ví dụ: v20.10.0 và 10.2.3) là OK.
     - Nếu lỗi, restart máy và thử lại.
@@ -17,13 +17,13 @@
 
 ### 2. Chuẩn Bị MongoDB (Database)
 
-- Dùng **MongoDB Atlas** 
+- Dùng **MongoDB Atlas**
 - **Bước 1: Đăng ký tài khoản MongoDB Atlas**
     - Truy cập: https://www.mongodb.com/atlas/database
-    - Click "Sign Up" → Đăng ký bằng email hoặc Google account (miễn phí).
-- **Bước 2: Tạo Cluster (Database Server) miễn phí**
+    - Click "Sign Up" → Đăng ký bằng email hoặc Google account.
+- **Bước 2: Tạo Cluster (Database Server)**
     - Sau đăng nhập, click "Build a Database" hoặc "Create" ở dashboard.
-    - Chọn **Shared** (miễn phí) → Click "Create" cho tier M0 (free forever, 512MB storage đủ cho học).
+    - Chọn **Shared** (miễn phí) → Click "Create" cho tier M0.
     - Chọn Provider: AWS (mặc định).
     - Chọn Region gần Việt Nam nhất: "Asia Pacific - Singapore" (ap-southeast-1) để tốc độ nhanh.
     - Đặt tên Cluster: `ClusterUrbanTech`
@@ -46,7 +46,8 @@
     - **Connection String**: `mongodb+srv://hwuxfuoc19it_db_user:e76NQ2jZaEZEzvXN@clusterurbantech.97zwxie.mongodb.net?retryWrites=true&w=majority`
 - **Bước 6: Test kết nối (tùy chọn, dùng VS Code hoặc Compass)**
     - Cài MongoDB Compass (từ https://www.mongodb.com/products/tools/compass).
-    - Paste connection string vào Compass → Connect → Nếu thấy database là OK.
+    - Paste connection string vào Compass → Connect → Nếu thấy database "admin" là OK.
+    - Tạo database mới: Trong Compass, click "Create Database" → Tên: `batdongsan` (sẽ dùng cho app).
 
 ### 3. Chuẩn Bị Backend (Node.js + Express)
 
@@ -54,7 +55,7 @@
 - **Bước 1: Tạo thư mục dự án**
     - Mở terminal, chạy:
         
-        ```
+        ```bash
         mkdir weburbantech
         cd weburbantech
         mkdir backend
@@ -78,27 +79,26 @@
         ```
         MONGOOSE_DB_URL=mongodb+srv://hwuxfuoc19it_db_user:e76NQ2jZaEZEzvXN@clusterurbantech.97zwxie.mongodb.net?retryWrites=true&w=majority  
         PORT=5000
-        JWT_SECRET=mysecretkey 
+        JWT_SECRET=weburbantech_secret_key 
         ```
         
     - Tạo file `server.js` (entry point):
         
         ```jsx
+        require('dotenv').config();
+        
         const express = require('express');
         const mongoose = require('mongoose');
-        const dotenv = require('dotenv');
         const cors = require('cors');
-        
-        dotenv.config();
+        const connectDB = require('./config/db');
+        const authRoutes = require('./api/auth/auth');
         
         const app = express();
+        
         app.use(express.json());  
         app.use(cors()); 
-        
-        // Connect MongoDB
-        mongoose.connect(process.env.MONGO_URI)
-          .then(() => console.log('MongoDB connected'))
-          .catch(err => console.log(err));
+        connectDB();
+        app.use('/api/auth', authRoutes);
         
         // Route test
         app.get('/', (req, res) => res.send('Backend running!'));
@@ -119,11 +119,52 @@
 - **Bước 1: Tạo React app**
     - Từ thư mục chính `weburbantech` , chạy:
         
+        ```bash
+        npm create vite@latest
         ```
-        npx create-react-app frontend
+        
+    - Đặt tên project: `frontend`
+    - Select a framework: Chọn `React`
+    - Select a variant: Chọn `JavaScript`
+    - Enter 2 bước tiếp xong chuyển đến frontend
+        
+        ```bash
         cd frontend
         ```
         
+    - Cài đặt `tailwindcss` và `@tailwindcss/vite`
+        
+        ```bash
+        npm install tailwindcss @tailwindcss/vite
+        ```
+        
+    - Thêm thư viện `@tailwindcss/vite` vào `vite.config.js`
+        
+        ```jsx
+        import { defineConfig } from 'vite'
+        import tailwindcss from '@tailwindcss/vite'
+        import react from '@vitejs/plugin-react'
+        
+        // https://vite.dev/config/
+        export default defineConfig({
+          plugins: [react(), tailwindcss()],
+        })
+        ```
+        
+    - Thêm vào `src/index.css`
+        
+        ```css
+        @import "tailwindcss";
+        ```
+        
+    - Cài `npm` và chạy `npm run dev`
+        
+        ```bash
+        npm install
+        npm run dev
+        ```
+        
+    
 - **Bước 2: Cài packages cần thiết**
     - `npm install axios react-router-dom` (Axios: Gọi API; Router: Navigation).
     - Nếu cần UI đẹp: `npm install @mui/material @emotion/react @emotion/styled`.
@@ -131,34 +172,44 @@
     - Mở `src/App.js`, chỉnh thành:
         
         ```jsx
-        import logo from './logo.svg';
-        import './App.css';
+        import { useState } from 'react'
+        import reactLogo from './assets/react.svg'
+        import viteLogo from '/vite.svg'
+        import './App.css'
         
         function App() {
+          const [count, setCount] = useState(0)
+        
           return (
-            <div className="App">
-              <header className="App-header">
-                <img src={logo} className="App-logo" alt="logo" />
-                <p>
-                  Frontend
-                </p>
-                <a
-                  className="App-link"
-                  href="https://github.com/hwuxfuoc/NT208_WebUrbanTech"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                >
-                  GitHub
+            <>
+              <div>
+                <a href="https://vite.dev" target="_blank">
+                  <img src={viteLogo} className="logo" alt="Vite logo" />
                 </a>
-              </header>
-            </div>
-          );
+                <a href="https://react.dev" target="_blank">
+                  <img src={reactLogo} className="logo react" alt="React logo" />
+                </a>
+              </div>
+              <h1>Vite + React</h1>
+              <div className="card">
+                <button onClick={() => setCount((count) => count + 1)}>
+                  count is {count}
+                </button>
+                <p>
+                  Edit <code>src/App.jsx</code> and save to test HMR
+                </p>
+              </div>
+              <p className="read-the-docs">
+                Click on the Vite and React logos to learn more
+              </p>
+            </>
+          )
         }
         
-        export default App;
+        export default App
         ```
         
 - **Bước 4: Chạy test frontend**
-    - Chạy: `npm start`
-    - Mở browser: http://localhost:3000/ → Thấy "Xin chào từ Frontend!" là OK.
+    - Chạy: `npm run dev`
+    - Mở browser: [http://localhost:5173/](http://localhost:3000/) → Thấy Web là OK.
     - Để connect backend: Trong code, dùng axios.get('http://localhost:5000/') để test.
